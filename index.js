@@ -33,10 +33,10 @@ window.addEventListener("DOMContentLoaded", () => {
   function handleResultValidation() {
     let roundWon = false;
     for (let i = 0; i <= 7; i++) {
-      const winCondition = winningConditions[i];
-      const a = board[winCondition[0]];
-      const b = board[winCondition[1]];
-      const c = board[winCondition[2]];
+      const winConditions = winningConditions[i];
+      const a = board[winConditions[0]];
+      const b = board[winConditions[1]];
+      const c = board[winConditions[2]];
       if (a === "" || b === "" || c === "") {
         continue;
       }
@@ -44,16 +44,16 @@ window.addEventListener("DOMContentLoaded", () => {
         roundWon = true;
         break;
       }
-      if (roundWon) {
-        announe(currentPlayer === "X" ? PLAYERX_WON : PLAYERO_WON);
-        isGameActive = false;
-        return;
-      }
-      if (!board.includes("")) announe(TIE);
     }
+    if (roundWon) {
+      announce(currentPlayer === "X" ? PLAYERX_WON : PLAYERO_WON);
+      isGameActive = false;
+      return;
+    }
+    if (!board.includes("")) announce(TIE);
   }
 
-  const announe = (type) => {
+  const announce = (type) => {
     switch (type) {
       case PLAYERO_WON:
         announcer.innerHTML = 'Player <span class="playerO">O</span> Won';
